@@ -1,0 +1,81 @@
+body {
+  background-color: #032d1f;
+  color: #e6f2ed;
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.8;
+}
+
+.contact-section {
+  padding: 80px 30px;
+}
+
+.section-title {
+  font-size: 42px;
+  font-weight: bold;
+  color: #00ffb3;
+  margin-bottom: 20px;
+}
+
+.section-description {
+  font-size: 18px;
+  color: #b4e0d2;
+  max-width: 720px;
+  margin: auto;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.contact-details h4 {
+  color: #00ffb3;
+  margin-top: 20px;
+}
+
+.contact-details p a {
+  text-decoration: none;
+  color: #e6f2ed;
+}
+
+.contact-details p a:hover {
+  color: #00ffb3;
+}
+
+.social-icons {
+  margin-top: 15px;
+}
+
+.social-icons a {
+  font-size: 28px;
+  color: #e6f2ed;
+  margin-right: 18px;
+  transition: 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #00ffb3;
+  transform: scale(1.1);
+}
+
+.bottom-text {
+  font-size: 17px;
+  margin-top: 30px;
+  color: #d2f6e9;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 30px;
+  }
+
+  .section-description {
+    font-size: 16px;
+  }
+
+  .bottom-text {
+    font-size: 15px;
+  }
+
+  .social-icons a {
+    font-size: 24px;
+    margin-right: 12px;
+  }
+}
