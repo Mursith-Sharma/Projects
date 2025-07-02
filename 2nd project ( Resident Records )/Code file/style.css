@@ -1,0 +1,86 @@
+.banner {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+}
+h1
+{
+  position: fixed;
+  top: 21%;
+  margin-left: 20%;
+  color: rgb(104, 8, 8);
+  text-align: center;
+  align-content: center;
+  font-size: 56px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+
+
+}
+.btn1
+{
+  color: blue;
+  position: fixed;
+  top: 40%;
+  left: 20%;
+  margin-left: 24%;
+  color: rgb(238, 255, 0);
+  font-size: 40px;
+  font-weight: bold;
+}
+.btn2
+{
+  color: blue;
+  position: fixed;
+  width: 15%;
+  top: 55%;
+  left: 20%;
+  margin-left: 24%;
+  color: rgb(238, 255, 0);
+  font-size: 40px;
+  font-weight: bold;
+}
+
+      .body1 {
+        background-color: #f8f9fa;
+      }
+      .serh1 {
+        margin-top: -5%;
+        font-weight: bold;
+        text-align: center;
+        color: #0d6efd;
+      }
+      .search-boxx {
+        margin-bottom: 50%;
+        margin-top: 20%; /* இங்கே உங்கள் வேண்டிய அளவு */
+        margin-bottom: 10%;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 14px 5px rgba(131, 7, 7, 0.75);
+        
+      }
+
+    .results-table1
+    {
+      margin-top: 30px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+      width: 100%;
+    }
+    .head-title1
+    {
+      text-align: center;
+      font-weight: bold;
+      color: #0d6efd;
+      margin-top: 30px;
+    }
