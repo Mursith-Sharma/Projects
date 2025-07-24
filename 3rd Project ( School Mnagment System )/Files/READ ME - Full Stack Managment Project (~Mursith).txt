@@ -1,0 +1,49 @@
+Project name :- "School Students & Teachers Admission"
+
+
+Bio :-
+ mainly this web application created for Complete school management system (for bussiness purpose). but currently created for project with School Students & Teachers Admission with secure login & modify & delete & etc...
+ php Laravel
+ project duration - 24 days
+ security - Hashing , OOPS , can't input any script. in future will update secure...
+ HTML,CSS,JAVA,PHP,MYSQL
+
+Database Connect Info
+
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=base64:CjrH494aMDiXr29ajR1hVFqiQF4J4ydevuNYdEQBe4w=
+APP_DEBUG=true
+APP_URL=http://localhost
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=school_management
+DB_USERNAME=root
+DB_PASSWORD=
+ 
+
+School management system will update these feaures 👇👇👇👇
+
+home page 👇
+.Recent Activities
+.Upcoming Events
+.Weekly Attendance
+.Today's Attendance
+.Fees Collected
+
+list 👇
+.exam & marks
+.feedback
+.students behavior
+.Timetable
+.Attendance
+.Exams & Marks
+.Fees Management
+.Announcements
+.Settings
+ 
+NOTE!!!! 
+import my database tables
+method 1: run in vs code terminal =>  php artisan migrate 
+method 2: import MySQL file (.sql)
