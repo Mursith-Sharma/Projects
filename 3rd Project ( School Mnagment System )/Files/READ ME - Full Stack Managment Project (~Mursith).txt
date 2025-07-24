@@ -1,6 +1,5 @@
 Project name :- "School Students & Teachers Admission"
 
-
 Bio :-
  mainly this web application created for Complete school management system (for bussiness purpose). but currently created for project with School Students & Teachers Admission with secure login & modify & delete & etc...
  php Laravel
@@ -47,3 +46,9 @@ NOTE!!!!
 import my database tables
 method 1: run in vs code terminal =>  php artisan migrate 
 method 2: import MySQL file (.sql)
+
+&& in this project file i don't upload thease 👇👇👇
+.env
+vendor/
+node_modules/
+storage/logs/
