@@ -540,5 +540,55 @@
   </div>
 </div>
 
+<script>
+    const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let segments = [];
+const length = 25;
+let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+
+// initialize segments
+for (let i = 0; i < length; i++) {
+  segments.push({ x: mouse.x, y: mouse.y });
+}
+
+window.addEventListener('mousemove', function(e) {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+});
+
+function animate() {
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // move segments
+  segments[0].x += (mouse.x - segments[0].x) * 0.2;
+  segments[0].y += (mouse.y - segments[0].y) * 0.2;
+
+  for (let i = 1; i < segments.length; i++) {
+    segments[i].x += (segments[i - 1].x - segments[i].x) * 0.2;
+    segments[i].y += (segments[i - 1].y - segments[i].y) * 0.2;
+  }
+
+  // draw
+  ctx.strokeStyle = '#00ffcc';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(segments[0].x, segments[0].y);
+  for (let i = 1; i < segments.length; i++) {
+    ctx.lineTo(segments[i].x, segments[i].y);
+  }
+  ctx.stroke();
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+</script>
+
     </body>
     </html>
