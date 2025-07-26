@@ -1,594 +1,603 @@
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dezven Portfolio Website Template </title>
-        <!--- Bootstrap 5 CSS link --->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <!--- Font Awesom CSS link --->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <!--- Google Font Family --->
-        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
- 	    <!--- Live Jquery URL--->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        <!--- Bootstrap 5 Jquery URL--->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Teacher Management</title>
 
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-        <link rel="stylesheet" href="../css/style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
-            <style>
-    body {
-      margin: 0;
-      background: #000;
-      overflow: hidden;
-    }
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    canvas {
-      display: block;
-    }
-  </style>
-      </head>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .sidebar-link {
+            @apply flex items-center px-6 py-3 text-gray-700 hover:bg-gray-50 border-l-4 border-transparent transition-all duration-200;
+        }
+        .sidebar-link.active,
+        .sidebar-link:hover {
+            @apply bg-blue-50 border-l-2 border-blue-500 text-blue-700;
+        }
+        .notification-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background-color: #dc2626;
+            color: white;
+            font-size: 0.6rem;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        .dropdown-content {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            min-width: 200px;
+            background-color: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+            display: none;
+        }
+        .group:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
 
-      <!--Body Start-->
+<!-- Layout Wrapper -->
+<div class="flex">
 
-    <body>
-          <canvas id="canvas"></canvas>
-  <script src="cursor.js"></script>
-
-        	<!--- LOGO, MENU AND ABOUT DETAILS SECTION --->
- <div class="container-fluid bg-image">
-  <div class="container">
-    <nav class="navbar navbar-dark">
-      <a class="navbar-brand" href="#">My Portfolio...</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-        <div class="offcanvas-header">
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white shadow-lg h-screen fixed left-0 top-0 z-40">
+        <div class="p-6 border-b">
+            <h1 class="text-xl font-bold text-gray-800">SchoolMS</h1>
         </div>
-        <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About Me</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="service.html">Services</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://marstech.lk/">Our Company</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact Us</a>
-            </li>
-            <div class="info">
-              <p>Let's work together?</p>
-              <a href="#">mmursith12345@gmail.com</a>
+        <nav class="mt-4">
+            <a href="{{ route('home') }}" class="sidebar-link active">
+                <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+            </a>
+            <a href="{{ route('view.students') }}" class="sidebar-link">
+                <i class="fas fa-users mr-3"></i> Students
+            </a>
+            <a href="{{ route('teachers.view') }}" class="sidebar-link">
+                <i class="fas fa-chalkboard-teacher mr-3"></i> Teachers
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="fas fa-calendar-alt mr-3"></i> Attendance
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="fas fa-file-invoice-dollar mr-3"></i> Fees
+            </a>
+            <a href="#" class="sidebar-link">
+                <i class="fas fa-chart-bar mr-3"></i> Reports
+            </a>
+        </nav>
+        <div class="absolute bottom-0 w-full p-4 border-t">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="flex items-center text-red-600 hover:text-red-800 w-full">
+                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="ml-64 w-full p-6">
+
+        <!-- Header -->
+        <header class="flex items-center justify-between mb-6">
+            <div class="flex items-center space-x-4">
+                <h1 class="text-2xl font-semibold text-gray-800">Teachers</h1>
             </div>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="row">
-      <div class="col-lg-5 col-md-6">
-        <div class="about-detail">
-          <h5>Hello,</h5>
-          <h1>I'm Mursith Sharma🧑🏻‍💻</h1>
-          <p class="typing">I am Passionate about<span> Cybersecurity </span>
-          </p>
-          
-        </div>
-      </div>
-      <div class="col-lg-7 col-md-6">
-        <div class="banner-img">
-          <img src="" style="">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-  <!---ABOUT US SECTION ABOUT US SECTION ABOUT US SECTION  -->
-  <div class="container-fluid bg-color">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6 col-md-8 col-12">
-        <div class="about-right">
-          <h2>About Me</h2>
-          <h6>A Cybersecurity Analyst & Ethical Hacker based in Sri Lanka -MarsTech</h6>
-          <p>I <span>Safe and Secure</span> to build digital infrastructures and protect organizations from cyber threats. I perform ethical hacking, vulnerability assessments, and implement effective defense strategies to ensure data security and business continuity. With deep expertise in cybersecurity, I help clients stay protected in a constantly evolving threat landscape.</p>
-
-          <div class="row">
-            <div class="col-md-6">
-              <table>
-                <tr>
-                  <th>Birthday :</th>
-                  <td>/ 14th June 2002</td>
-                </tr>
-                <tr>
-                  <th>Age :</th>
-                  <td>/ 23 Yr</td>
-                </tr>
-                <tr>
-                  <th>Residence :</th>
-                  <td>/ Srilanka</td>
-                </tr>
-                <tr>
-                  <th>Address :</th>
-                  <td>/ dolakpoor 112 Beem road</td>
-                </tr>
-              </table>
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center">
+                    <i class="fas fa-print mr-2"></i> Print
+                </button>
             </div>
-            <div class="col-md-6">
-              <table>
-                <tr>
-                  <th>Email :</th>
-                  <td>/ cybermursith404@gmail.com</td>
-                </tr>
-                <tr>
-                  <th>Phone :</th>
-                  <td>/ 760011886</td>
-                </tr>
-                <tr>
-                  <th>Company:</th>
-                  <td>/ MarsTech</td>
-                </tr>
-                <tr>
-                  <th>Github :</th>
-                  <td><a href="https://github.com/Mursith-Sharma">/ https://github.com/Mursith-Sharma</a></td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6 col-md-4 col-12">
-        <div class="about-left">
-          <img src="https://github.com/Mursith-Sharma/Projects/blob/main/1st%20Project%20(%20Portfolio%20Website%20)/Images/kindpng_3519681%20(1).png?raw=true">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+        </header>
 
-<!---COUNTER SECTION -->
-<div class="container-fluid">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-10 counter">
-        <div class="row">
-          <div class="col-lg-3 col-md-6 col-6">
-            <span class="counter-icon">
-              <i class="fa fa-hand-peace-o"></i>
-            </span>
-            <span class="counter-icon">
-              <h5>2</h5>
-              <p>Total Experience</p>
-            </span>
-          </div>
-          <div class="col-lg-3 col-md-6 col-6">
-            <span class="counter-icon">
-              <i class="fa fa-smile-o"></i>
-            </span>
-            <span class="counter-icon">
-              <h5>120</h5>
-              <p>Happy Clients</p>
-            </span>
-          </div>
-          <div class="col-lg-3 col-md-6 col-6">
-            <span class="counter-icon">
-              <i class="fa fa-thumbs-up"></i>
-            </span>
-            <span class="counter-icon">
-              <h5>120</h5>
-              <p>Project Complete</p>
-            </span>
-          </div>
-          <div class="col-lg-3 col-md-6 col-6">
-            <span class="counter-icon">
-              <i class="fa fa-trophy"></i>
-            </span>
-            <span class="counter-icon">
-              <h5>115</h5>
-              <p>Award Win</p>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--------------SKILL SECTION ------------->
-<div class="container-fluid about-skill">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-1"></div>
-      <div class="col-lg-5 col-md-6">
-        <p>I <span>Secure and develop cybersecurity solutions</span> for individuals and businesses, focusing on securing websites, applications, and digital infrastructures. I specialize in threat detection, vulnerability assessments, ethical hacking, and building strong defenses against cyber attacks. <span>Protecting digital assets and ensuring data privacy</span> is at the core of my work.</p>
-      <div class="col-lg-5 col-md-6">
-        <div class="skill-section">
-          <p>Ethical Hacking</p>
-          <span>95%</span>
-        </div>
-        <div class="skill-experience">
-          <span style="width:95%"></span>
-        </div>
-        <div class="skill-section">
-          <p>Network Security</p>
-          <span>65%</span>
-        </div>
-        <div class="skill-experience">
-          <span style="width:65%"></span>
-        </div>
-        <div class="skill-section">
-          <p>Penetration Testing</p>
-          <span>79%</span>
-        </div>
-        <div class="skill-experience">
-          <span style="width:79%"></span>
-        </div>
-        <div class="skill-section">
-          <p>Cybersecurity Audits</p>
-          <span>89%</span>
-        </div>
-        <div class="skill-experience">
-          <span style="width:89%"></span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<!--------------SERVICES SECTION  ------------->
-<div class="container-fluid bg-color pb-100">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="heading-section">
-          <h2>What I Do</h2>
-          <div class="heading-borders">
-            <span class="selected"></span>
-          </div>
-          <p>I specialize in both <strong>Cybersecurity</strong> and <strong>Full Stack Web Development</strong>. I protect digital systems from cyber threats through ethical hacking, vulnerability assessments, and network security audits. On the development side, I build modern, responsive web applications using technologies like HTML, CSS, JavaScript, C#, .NET, PHP, and MySQL — ensuring both functionality and security.</p>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-4 col-sm-6">
-        <div class="service-section">
-          <img src="https://apprenticely.org/wp-content/uploads/2023/11/Cyber-security.jpg">
-          <h6>🛡️ Unique Protection</h6>
-          <div class="service-border">
-            <span></span>
-          </div>
-          <p>I implement custom security strategies tailored to your infrastructure to protect data, applications, and networks from real-world cyber threats.</p>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6">
-        <div class="service-section">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTj-10U3jghULm6tWzHgLhJ9TVEsZVd9R_vrjRnImBSm5MLOocRxoEDI2U9WQMCXKomV2I&usqp=CAU">
-          <h6>🔍 Vulnerability Assessment</h6>
-          <div class="service-border">
-            <span></span>
-          </div>
-          <p>I perform regular scans and manual testing to identify and fix potential vulnerabilities before attackers can exploit them.</p>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6">
-        <div class="service-section">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ9ZaBetZdLrDcckoJmCeLPAkz9kOSdWKyeQ&s">
-          <h6>🧪 Penetration Testing</h6>
-          <div class="service-border">
-            <span></span>
-          </div>
-          <p>Simulating real-world attacks, I ethically test your systems to uncover weaknesses and provide clear, actionable remediation steps.</p>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6">
-        <div class="service-section">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7_pa2OR0YxBk3oNkZ2yhQ8L21wprefyqJcg&s">
-          <h6>💻 Clean UI & Responsive Design</h6>
-          <div class="service-border">
-            <span></span>
-          </div>
-          <p>I build responsive, user-friendly interfaces that look and work great across all devices and screen sizes using HTML, CSS, and JavaScript.</p>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6">
-        <div class="service-section">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTipS4nvAoQkJnlmdEmiLc62VRv21UPoWx1aQ&s">
-          <h6>🛠️ Backend Integration</h6>
-          <div class="service-border">
-            <span></span>
-          </div>
-          <p class="service-description">From APIs to databases, I develop robust backend logic using C#, PHP, .NET, and MySQL to power secure and scalable web applications.</p>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6">
-        <div class="service-section">
-          <img src="https://www.domedia.lk/wp-content/uploads/2021/10/best-website-builder-for-small-business-min.png">
-          <h6>🚀 Full Lifecycle Delivery</h6>
-          <div class="service-border">
-            <span></span>
-          </div>
-          <p class="service-description">I handle the full development process — from concept and UI/UX to deployment — ensuring optimized performance and secure deployment.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
- <!--- PORTFOLIO SECTION  --->
- <div class="container-fluid pb-100">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="heading-section">
-          <h2>What Did My Students Archive?</h2>
-          <div class="heading-borders">
-            <span class="selected"></span>
-          </div>
-          <p>My students have archived critical projects in both cybersecurity and full stack development.<br>
-         </p>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-4 col-md-6 col-xs-12">
-        <div class="portfolio-section">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt9VkUJeKPUrYK0238tEW4opzqndBTyVLTnA&s">
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-xs-12">
-        <div class="portfolio-section">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsKHmAZ_gLmavdH3FDDGxf1UYFu-lUUfv0_E8vxdFRts3qyzZbkH0xEsbjzgt7R3RA3ik&usqp=CAU">
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-xs-12">
-        <div class="portfolio-section">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxFBLCsZln4Ap8sBxcTXgJY8Su_912wpFpjw&s">
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-xs-12">
-        <div class="portfolio-section">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShdPb3i5NK0UK9EZyKYYsJCYgS01Wxd5As8Q&s">
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-xs-12">
-        <div class="portfolio-section">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu4RsCfoBYE4gan-EGNAvN3uRY0x43GwyK5A&s">
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-xs-12">
-        <div class="portfolio-section">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo02FRY-2AUKP_7EfAuz28Etx9n5-l-y4DUA&s">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
- <!---TESTIMONIAL SECTION --->
- <div class="container-fluid bg-color pb-100">
-  <div class="container ">
-    <div class="row">
-      <div class="col-12">
-        <div class="heading-section">
-          <h2>About It</h2>
-          <div class="heading-borders"><span></span></div>
-            <p>I am a passionate tech professional specializing in both Cybersecurity and Full Stack Web Development. My goal is to build powerful, responsive, and secure digital solutions. In Cybersecurity, I focus on identifying vulnerabilities, preventing cyber threats, and ensuring data protection using the latest security practices. On the Full Stack side, I develop complete web applications—from designing clean and interactive front-end interfaces to building robust back-end systems using modern frameworks and databases. My work emphasizes both functionality and security, ensuring that the solutions I deliver are not only efficient but also protected against real-world cyber risks. Whether it's safeguarding sensitive information or creating seamless user experiences, I am dedicated to delivering high-quality results with attention to detail and performance. I continuously learn and evolve to stay ahead in this fast-changing tech landscape.</p>
-
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <div class="demo-1 owl-carousel owl-theme">
-          <div class="item">
-            <div class="testimonial">
-              <div class="row">
-                <div class="col-3"> <img src="image/testimonial-1.jpg"> </div>
-                <div class="col-9">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                  <h5>Nancy Bayers</h5>
-                  <h6> Founder & CEO  At Dezven</h6>
+        <!-- Filters -->
+        <div class="bg-white p-4 rounded-lg shadow-sm mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
+                    <input type="text" id="searchInput" placeholder="Search teachers..." class="w-full px-3 py-2 border border-gray-300 rounded-md">
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="testimonial">
-              <div class="row">
-                <div class="col-3"> <img src="image/testimonial-2.jpg"> </div>
-                <div class="col-9">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                  <h5>Nancy Bayers</h5>
-                  <h6> Founder & CEO  At Dezven</h6>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                    <select id="genderFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                        <option value="">All Genders</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="testimonial">
-              <div class="row">
-                <div class="col-3"> <img src="image/testimonial-3.jpg"> </div>
-                <div class="col-9">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                  <h5>Nancy Bayers</h5>
-                  <h6> Founder & CEO  At Dezven</h6>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Qualification</label>
+                    <select id="qualificationFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                        <option value="">All Qualifications</option>
+                        <option value="B.Ed">B.Ed</option>
+                        <option value="M.Sc">M.Sc</option>
+                        <option value="PhD">PhD</option>
+                    </select>
                 </div>
-              </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Experience</label>
+                    <select id="experienceFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                        <option value="">All Experiences</option>
+                        <option value="0-5">0-5 Years</option>
+                        <option value="6-10">6-10 Years</option>
+                        <option value="10+">10+ Years</option>
+                    </select>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
+
+        <!-- Teachers Table -->
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gender</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Qualification</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Experience</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Joining Date</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="teachersTableBody" class="bg-white divide-y divide-gray-200">
+                        <!-- Filled by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex items-center justify-between mt-6">
+            <div>
+                <p class="text-sm text-gray-700">Page <span id="currentPage">1</span> of <span id="totalPages">1</span></p>
+            </div>
+            <div class="flex space-x-2">
+                <button id="prevPage" class="relative inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white bg-blue-600 rounded-md shadow-md hover:bg-blue-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 transform hover:-translate-y-0.5">
+                    <i class="fas fa-arrow-left mr-2"></i> Previous
+                </button>
+                <button id="nextPage" class="relative inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white bg-blue-600 rounded-md shadow-md hover:bg-blue-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 transform hover:-translate-y-0.5">
+                    Next <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </main>
 </div>
 
-<!-------------- CONTACT US SECTION ------------->
-<div class="container-fluid pb-100">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="heading-section">
-          <h2>Let's work together?</h2>
-          <div class="heading-borders">
-            <span class="selected"></span>
-          </div>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br> Apple has been the standard dummy text. </p>
+<!-- Edit Teacher Modal -->
+<div id="edit-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl fade-in">
+        <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+            <h3 class="text-lg font-semibold text-gray-800">Edit Teacher</h3>
+            <button id="close-edit-modal" class="text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-8 col-md-7 col-12 contact-form">
-        <h2>Get in Touch</h2>
-        <div class="row">
-          <div class="col-md-6 col-12 mt-4">
-            <input type="text" class="form-control" placeholder="Enter Name...">
-          </div>
-          <div class="col-md-6 col-12 mt-4">
-            <input type="text" class="form-control" placeholder="Enter Email...">
-          </div>
-          <div class="col-12 mt-4">
-            <input type="text" class="form-control" placeholder="Enter Subject...">
-          </div>
-          <div class="col-12 mt-4">
-            <textarea class="form-control" placeholder="Enter Comment..."></textarea>
-          </div>
-          <div class="col-12 mt-4">
-            <button>Send Me </button>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-5 contact-info">
-        <div class="col-12">
-          <h4>E-Mail :</h4>
-          <p> marstechcampus@gmail.com <br> mmursith12345@gmail.com </p>
-        </div>
-        <div class="col-12">
-          <h4>Address :</h4>
-          <p>  No 103, Zahira Road, Mawanella, Sri Lanka. </p>
-        </div>
-        <div class="col-12">
-          <h4>Phone :</h4>
-          <p>+94 76 00 11 886  </p>
-        </div>
-        <div class="col-12">
-          <h4>WhatsApp :</h4>
-          <p>+94 76 00 11 886  </p>
-        </div>
-        <div class="col-12">
-          <a href="https://github.com/Mursith-Sharma" target="_blank">
-            <i class="fa fa-facebook"> </i>
-          </a>
-          <a href="https://www.youtube.com/" target="_blank">
-            <i class="fa fa-youtube"> </i>
-          </a>
-          <a href="https://www.linkedin.com/in/mohamed-mursith/" target="_blank">
-            <i class="fa fa-linkedin"> </i>
-          </a>
-          <a href="https://x.com/Mursith_Sharma" target="_blank">
-            <i class="fa fa-instagram"> </i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-        
+        <form id="editTeacherForm" class="p-6 space-y-4 overflow-y-auto max-h-[80vh]">
+            <input type="hidden" id="editId">
+            <input type="hidden" id="editGradeSections">
 
-<!--------FOOTER SECTION --------->
-<div class="container-fluid footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6 col-md-5 col-12">
-        <div class="footer-section">
-          <a href="https://github.com/Mursith-Sharma" target="_blank">
-            <i class="fa fa-facebook"></i>
-          </a>
-          <a href="https://x.com/Mursith_Sharma" target="_blank">
-            <i class="fa fa-twitter"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/mohamed-mursith/" target="_blank">
-            <i class="fa fa-linkedin"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/mohamed-mursith/" target="_blank">
-            <i class="fa fa-instagram"></i>
-          </a>
-          <a href="https://x.com/Mursith_Sharma" target="_blank">
-            <i class="fa fa-youtube"></i>
-          </a>
-        </div>
-      </div>
-      <div class="col-lg-6 col-md-7 col-12">
-        <p>Copyright © 2022 All Rights Reserved Mursith_Sharma</p>
-      </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="editFullName" class="block text-sm font-medium text-gray-700">Full Name</label>
+                    <input type="text" id="editFullName" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div>
+                    <label for="editPhone" class="block text-sm font-medium text-gray-700">Phone</label>
+                    <input type="text" id="editPhone" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div>
+                    <label for="editEmail" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="editEmail" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div>
+                    <label for="editGender" class="block text-sm font-medium text-gray-700">Gender</label>
+                    <select id="editGender" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="editDob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                    <input type="date" id="editDob" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div>
+                    <label for="editJoiningDate" class="block text-sm font-medium text-gray-700">Joining Date</label>
+                    <input type="date" id="editJoiningDate" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div>
+                    <label for="editAddress" class="block text-sm font-medium text-gray-700">Address</label>
+                    <input type="text" id="editAddress" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div>
+                    <label for="editCity" class="block text-sm font-medium text-gray-700">City</label>
+                    <input type="text" id="editCity" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div>
+                    <label for="editPostalCode" class="block text-sm font-medium text-gray-700">Postal Code</label>
+                    <input type="text" id="editPostalCode" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div>
+                    <label for="editQualification" class="block text-sm font-medium text-gray-700">Qualification</label>
+                    <input type="text" id="editQualification" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div>
+                    <label for="editSpecialization" class="block text-sm font-medium text-gray-700">Specialization</label>
+                    <input type="text" id="editSpecialization" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div>
+                    <label for="editExperience" class="block text-sm font-medium text-gray-700">Experience</label>
+                    <input type="number" id="editExperience" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div>
+                    <label for="editPreviousInstitution" class="block text-sm font-medium text-gray-700">Previous Institution</label>
+                    <input type="text" id="editPreviousInstitution" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div>
+                    <label for="editEmergencyName" class="block text-sm font-medium text-gray-700">Emergency Name</label>
+                    <input type="text" id="editEmergencyName" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div>
+                    <label for="editEmergencyPhone" class="block text-sm font-medium text-gray-700">Emergency Phone</label>
+                    <input type="text" id="editEmergencyPhone" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div>
+                    <label for="editRelation" class="block text-sm font-medium text-gray-700">Relation</label>
+                    <select id="editRelation" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                        <option value="">Select Relation</option>
+                        <option value="Spouse">Spouse</option>
+                        <option value="Parent">Parent</option>
+                        <option value="Sibling">Sibling</option>
+                        <option value="Friend">Friend</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="editRole" class="block text-sm font-medium text-gray-700">Role</label>
+                    <select id="editRole" class="w-full px-4 py-2 border border-gray-300 rounded-md" disabled>
+                        <option value="teacher">Teacher</option>
+                    </select>
+                    <input type="hidden" name="role" value="teacher">
+                </div>
+            </div>
+            <div class="md:col-span-2 flex justify-end space-x-4 mt-6">
+                <button type="button" onclick="closeEditModal()" class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 transition">Cancel</button>
+                <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Update</button>
+            </div>
+        </form>
     </div>
-  </div>
 </div>
+
+<!-- Reptile Interactive Cursor -->
+<canvas id="canvas"></canvas>
 
 <script>
-    const canvas = document.getElementById('canvas');
+// Reptile Cursor Animation
+const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let segments = [];
-const length = 25;
-let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+const mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+const segments = [];
+const numSegments = 20;
 
-// initialize segments
-for (let i = 0; i < length; i++) {
-  segments.push({ x: mouse.x, y: mouse.y });
+for (let i = 0; i < numSegments; i++) {
+    segments.push({ x: mouse.x, y: mouse.y });
 }
 
-window.addEventListener('mousemove', function(e) {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
+window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
 });
 
 function animate() {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // move segments
-  segments[0].x += (mouse.x - segments[0].x) * 0.2;
-  segments[0].y += (mouse.y - segments[0].y) * 0.2;
+    segments[0].x += (mouse.x - segments[0].x) * 0.2;
+    segments[0].y += (mouse.y - segments[0].y) * 0.2;
 
-  for (let i = 1; i < segments.length; i++) {
-    segments[i].x += (segments[i - 1].x - segments[i].x) * 0.2;
-    segments[i].y += (segments[i - 1].y - segments[i].y) * 0.2;
-  }
+    for (let i = 1; i < segments.length; i++) {
+        segments[i].x += (segments[i - 1].x - segments[i].x) * 0.2;
+        segments[i].y += (segments[i - 1].y - segments[i].y) * 0.2;
+    }
 
-  // draw
-  ctx.strokeStyle = '#00ffcc';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(segments[0].x, segments[0].y);
-  for (let i = 1; i < segments.length; i++) {
-    ctx.lineTo(segments[i].x, segments[i].y);
-  }
-  ctx.stroke();
+    ctx.strokeStyle = '#00ffcc';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(segments[0].x, segments[0].y);
+    for (let i = 1; i < segments.length; i++) {
+        ctx.lineTo(segments[i].x, segments[i].y);
+    }
+    ctx.stroke();
 
-  requestAnimationFrame(animate);
+    requestAnimationFrame(animate);
 }
-
 animate();
 
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+// Teacher Data State
+let state = {
+    teachers: @json($teachersData),
+    filteredTeachers: @json($teachersData),
+    currentPage: 1,
+    itemsPerPage: 10
+};
+
+// Format Date for Input
+function formatDateForInput(dateString) {
+    if (!dateString) return '';
+    try {
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) return '';
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    } catch (e) {
+        console.error("Date formatting error:", e);
+        return '';
+    }
+}
+
+// Render Teachers Table
+function renderTeachers() {
+    const startIndex = (state.currentPage - 1) * state.itemsPerPage;
+    const paginatedData = state.filteredTeachers.slice(startIndex, startIndex + state.itemsPerPage);
+    const tableBody = document.getElementById('teachersTableBody');
+    tableBody.innerHTML = '';
+
+    paginatedData.forEach(teacher => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-gray-900">${teacher.name}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">${teacher.contact}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">${teacher.gender}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">${teacher.qualification}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">${teacher.experience} years</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                ${formatDateForInput(teacher.joiningDate)}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                <button data-id="${teacher.id}" class="text-blue-600 hover:text-blue-900 mr-4 view-btn">View</button>
+                <button data-id="${teacher.id}" class="text-green-600 hover:text-green-900 mr-4 edit-btn">Edit</button>
+                <button data-id="${teacher.id}" class="text-red-600 hover:text-red-900 delete-btn">Delete</button>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+
+    updatePagination();
+}
+
+// Update Pagination
+function updatePagination() {
+    const totalPages = Math.ceil(state.filteredTeachers.length / state.itemsPerPage);
+    document.getElementById('currentPage').textContent = state.currentPage;
+    document.getElementById('totalPages').textContent = totalPages;
+}
+
+// Pagination Controls
+document.getElementById('prevPage').addEventListener('click', () => {
+    if (state.currentPage > 1) {
+        state.currentPage--;
+        renderTeachers();
+    }
+});
+
+document.getElementById('nextPage').addEventListener('click', () => {
+    const totalPages = Math.ceil(state.filteredTeachers.length / state.itemsPerPage);
+    if (state.currentPage < totalPages) {
+        state.currentPage++;
+        renderTeachers();
+    }
+});
+
+// Search and Filter
+document.getElementById('searchInput').addEventListener('input', function () {
+    const query = this.value.toLowerCase();
+    state.filteredTeachers = state.teachers.filter(t =>
+        t.name.toLowerCase().includes(query) ||
+        t.contact.includes(query)
+    );
+    state.currentPage = 1;
+    renderTeachers();
+});
+
+['genderFilter', 'qualificationFilter', 'experienceFilter'].forEach(id => {
+    document.getElementById(id).addEventListener('change', function () {
+        const filters = {
+            gender: document.getElementById('genderFilter').value,
+            qualification: document.getElementById('qualificationFilter').value,
+            experience: document.getElementById('experienceFilter').value
+        };
+
+        state.filteredTeachers = state.teachers.filter(t => {
+            return (!filters.gender || t.gender === filters.gender) &&
+                   (!filters.qualification || t.qualification === filters.qualification) &&
+                   (!filters.experience || (
+                       filters.experience === '0-5' && t.experience <= 5 ||
+                       filters.experience === '6-10' && t.experience > 5 && t.experience <= 10 ||
+                       filters.experience === '10+' && t.experience > 10
+                   ));
+        });
+        state.currentPage = 1;
+        renderTeachers();
+    });
+});
+
+// Open Edit Modal
+function openEditModal(teacherId) {
+    const teacher = state.teachers.find(t => t.id == teacherId);
+    if (!teacher) {
+        alert("Teacher not found");
+        return;
+    }
+
+    document.getElementById('editId').value = teacher.id || '';
+    document.getElementById('editFullName').value = teacher.name || '';
+    document.getElementById('editPhone').value = teacher.contact || '';
+    document.getElementById('editEmail').value = teacher.email || '';
+    document.getElementById('editGender').value = teacher.gender || 'other';
+    document.getElementById('editDob').value = formatDateForInput(teacher.dob);
+    document.getElementById('editJoiningDate').value = formatDateForInput(teacher.joiningDate);
+    document.getElementById('editAddress').value = teacher.address || '';
+    document.getElementById('editCity').value = teacher.city || '';
+    document.getElementById('editPostalCode').value = teacher.postal_code || '';
+    document.getElementById('editQualification').value = teacher.qualification || '';
+    document.getElementById('editSpecialization').value = teacher.specialization || '';
+    document.getElementById('editExperience').value = teacher.experience || '';
+    document.getElementById('editPreviousInstitution').value = teacher.previous_institution || '';
+    document.getElementById('editEmergencyName').value = teacher.emergency_name || '';
+    document.getElementById('editEmergencyPhone').value = teacher.emergency_phone || '';
+    document.getElementById('editRelation').value = teacher.relation || '';
+
+    document.getElementById('edit-modal').classList.remove('hidden');
+}
+
+// Close Edit Modal
+function closeEditModal() {
+    document.getElementById('edit-modal').classList.add('hidden');
+}
+
+// Update Teacher
+document.getElementById('editTeacherForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const teacherId = document.getElementById('editId').value;
+
+    const formData = {
+        full_name: document.getElementById('editFullName').value,
+        phone: document.getElementById('editPhone').value,
+        email: document.getElementById('editEmail').value,
+        gender: document.getElementById('editGender').value,
+        dob: document.getElementById('editDob').value,
+        address: document.getElementById('editAddress').value,
+        city: document.getElementById('editCity').value,
+        postal_code: document.getElementById('editPostalCode').value,
+        qualification: document.getElementById('editQualification').value,
+        specialization: document.getElementById('editSpecialization').value,
+        experience: parseInt(document.getElementById('editExperience').value),
+        joining_date: document.getElementById('editJoiningDate').value,
+        previous_institution: document.getElementById('editPreviousInstitution').value,
+        emergency_name: document.getElementById('editEmergencyName').value,
+        emergency_phone: document.getElementById('editEmergencyPhone').value,
+        relation: document.getElementById('editRelation').value,
+        role: 'teacher',
+        _token: document.querySelector('meta[name="csrf-token"]').content
+    };
+
+    fetch(`/teachers/${teacherId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': formData._token
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Teacher updated successfully!');
+            closeEditModal();
+            // Refresh data
+            location.reload();
+        } else {
+            alert('Error: ' + (data.message || 'Please check the fields.'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+    });
+});
+
+// Attach Event Listeners
+function attachEventListeners() {
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+            openEditModal(id);
+        });
+    });
+
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+            if (confirm('Are you sure you want to delete this teacher?')) {
+                fetch(`/teachers/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert('Teacher deleted successfully!');
+                        location.reload();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to delete teacher.');
+                });
+            }
+        });
+    });
+}
+
+// Initialize
+document.getElementById('close-edit-modal').addEventListener('click', closeEditModal);
+document.getElementById('edit-modal').addEventListener('click', function (e) {
+    if (e.target === this) closeEditModal();
+});
+
+renderTeachers();
+attachEventListeners();
 </script>
 
-    </body>
-    </html>
+</body>
+</html>
