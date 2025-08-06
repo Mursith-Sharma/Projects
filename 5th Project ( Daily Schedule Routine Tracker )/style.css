@@ -1,0 +1,206 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('https://cdn.pixabay.com/photo/2021/05/14/08/44/running-6252827_960_720.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+/* Overlay for better text readability */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
+
+/* Container styling */
+.container {
+    background: linear-gradient(135deg, #8b4513, #daa520);
+    margin-top: 120px;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+}
+
+/* Header */
+h1 {
+    color: #fff;
+    background: linear-gradient(135deg, #4a0e0e, #8b4513);
+    padding: 20px;
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    margin: 0;
+}
+
+/* Input field */
+input[type="text"] {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border-bottom: 3px solid #daa520;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+input[type="text"]:focus {                                 /*இது ஒரு text input என்பதை குறிக்கிறது (அதாவது <input type="text">).*/
+    background: #fff;
+    box-shadow: 0 0 10px rgba(218, 165, 32, 0.5);
+}
+
+/* List styles */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+ul::-webkit-scrollbar {
+    width: 6px;
+}
+
+ul::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+ul::-webkit-scrollbar-thumb {
+    background: #daa520;
+    border-radius: 3px;
+}
+
+/* List item styling */
+li {
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+li:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.02);
+}
+
+/* Delete button (X) */
+span {
+    background: #ff4d4d;
+    color: white;
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+span:hover {
+    background: #c0392b;
+    transform: scale(1.1);
+}
+
+/* Completed task style */
+.brown {
+    color: #ccc;
+    text-decoration: line-through;
+    opacity: 0.7;
+    font-style: italic;
+}
+
+/* 
+Animation  => @keyframes
+responsive => @media
+*/
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .container {
+        margin-top: 60px;
+        width: 95%;
+        max-width: 100%;
+        border-radius: 12px;
+    }
+
+    h1 {
+        font-size: 28px;
+        padding: 16px;
+    }
+
+    input[type="text"],
+    li {
+        font-size: 16px;
+        padding: 14px;
+    }
+
+    body {
+        padding: 10px;
+    }
+}
+
+/* Optional: Add subtle animation when new task is added */
+li {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade out animation */
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+}
+
+li.fadeOut {
+    animation: fadeOut 0.6s forwards;
+}
