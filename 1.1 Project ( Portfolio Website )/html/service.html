@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Services - Mursith Sharma</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* Background */
+    body {
+      background: url('https://github.com/Mursith-Sharma/Projects/blob/main/1st%20Project%20(%20Portfolio%20Website%20)/Images/Untitled%20design%20(1)%20(1).png?raw=true') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* Binary Rain Background */
+    #binary-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .binary-char {
+      position: absolute;
+      color: rgba(16, 185, 128, 0.6);
+      font-size: 18px;
+      opacity: 0.7;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100px); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    /* Section Styling */
+    .services-section {
+      padding: 100px 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .section-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #a855f7, #06b6d4, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease-out;
+    }
+
+    .intro-text {
+      color: #d1d5db;
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease-out;
+    }
+
+    /* Service Cards */
+    .service-card {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(16, 185, 128, 0.2);
+      border-color: rgba(16, 185, 128, 0.5);
+    }
+
+    .service-card h3 {
+      color: #34d399;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .service-card h3 i {
+      margin-right: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover h3 i {
+      transform: scale(1.2);
+    }
+
+    .service-card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .service-card ul li {
+      position: relative;
+      padding-left: 25px;
+      margin-bottom: 0.7rem;
+      color: #e2e8f0;
+    }
+
+    .service-card ul li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: #10b981;
+    }
+
+    /* Table Styling */
+    .table {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .table thead th {
+      background: linear-gradient(90deg, #1d4ed8, #059669);
+      color: white;
+      font-weight: 600;
+    }
+
+    .table tbody tr:hover {
+      background: rgba(16, 185, 128, 0.1) !important;
+      transform: scale(1.01);
+      transition: all 0.3s ease;
+    }
+
+    /* Why Choose Me */
+    .reasons-list li {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 1rem;
+      color: #e2e8f0;
+      font-size: 1.1rem;
+    }
+
+    .reasons-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #10b981;
+      font-weight: bold;
+    }
+
+    /* Contact Button */
+    .btn-contact {
+      display: inline-block;
+      background: linear-gradient(90deg, #1d4ed8, #059669);
+      color: white;
+      padding: 12px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(16, 185, 128, 0.3);
+      transition: all 0.4s ease;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-contact:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(16, 185, 128, 0.4);
+      background: linear-gradient(90deg, #059669, #1d4ed8);
+    }
+
+    /* Previous Button */
+    #prev-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      background: linear-gradient(90deg, #1d4ed8, #059669);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 0 12px 12px 0;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: all 0.6s ease-out;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    #prev-button:hover {
+      transform: translateX(0);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+    }
+
+    #prev-button i {
+      transition: transform 0.3s ease;
+    }
+
+    #prev-button:hover i {
+      transform: translateX(-3px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Binary Rain Background -->
+  <div id="binary-rain"></div>
+
+  <!-- Previous Button -->
+  <a href="javascript:history.back()" id="prev-button">
+    <i class="fas fa-arrow-left"></i>
+    <span>Previous</span>
+  </a>
+
+  <section class="services-section">
+    <div class="container">
+      <!-- Title -->
+      <h1 class="section-title text-center">My Services</h1>
+
+      <!-- Intro Text -->
+      <p class="intro-text text-center">
+        Welcome! I’m <strong>Mursith Sharma</strong>, a dedicated Full Stack Developer and Cybersecurity Specialist offering top-tier services for businesses, startups, and individual clients. My mission is to provide secure, scalable, and modern digital solutions that compete with the best in the industry.
+      </p>
+
+      <!-- Service Cards -->
+      <div class="row mt-5">
+        <!-- Full Stack Development -->
+        <div class="col-md-6 mb-4">
+          <div class="service-card" id="card-dev">
+            <h3><i class="fas fa-code"></i> 🔧 Full Stack Development</h3>
+            <p>I build robust, responsive, and scalable web applications from the ground up with security at the core.</p>
+            <ul>
+              <li>Custom Website Design (HTML, CSS, Bootstrap, React)</li>
+              <li>Backend Development (PHP, MySQL, .NET, Node.js)</li>
+              <li>REST API Integration & Secure Authentication</li>
+              <li>Database Design & Performance Optimization</li>
+              <li>Fully Responsive Across All Devices</li>
+            </ul>
+            <p>Every line of code is clean, maintainable, and built for the future.</p>
+          </div>
+        </div>
+
+        <!-- Cybersecurity -->
+        <div class="col-md-6 mb-4">
+          <div class="service-card" id="card-sec">
+            <h3><i class="fas fa-shield-alt"></i> 🛡️ Cybersecurity Services</h3>
+            <p>Security isn’t an afterthought — it’s baked into every project from day one.</p>
+            <ul>
+              <li>Vulnerability Assessment & Penetration Testing (VAPT)</li>
+              <li>Web Application Firewall (WAF) Integration</li>
+              <li>Secure Code Review & Threat Modeling</li>
+              <li>Cyber Hygiene Audits for Teams & Systems</li>
+              <li>Network Analysis (Wireshark, Nmap, Burp Suite)</li>
+            </ul>
+            <p>I combine manual testing with automation to eliminate risks before they become threats.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparison Table -->
+      <div class="mt-5">
+        <h3 class="sub-title text-center mb-4" style="color: #34d399;">🏢 How I Compare to Traditional Companies</h3>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width: 30%;">Category</th>
+                <th>My Services</th>
+                <th>Traditional Companies</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Pricing</strong></td>
+                <td>✅ Affordable & Transparent</td>
+                <td>❌ High & Variable</td>
+              </tr>
+              <tr>
+                <td><strong>Customization</strong></td>
+                <td>✅ Fully Custom for Every Client</td>
+                <td>❌ Often Package-Based</td>
+              </tr>
+              <tr>
+                <td><strong>Turnaround Time</strong></td>
+                <td>✅ Faster Delivery (1-2 weeks)</td>
+                <td>❌ 3-4 weeks minimum</td>
+              </tr>
+              <tr>
+                <td><strong>Security First</strong></td>
+                <td>✅ Built-in From Day One</td>
+                <td>❌ Often Add-on</td>
+              </tr>
+              <tr>
+                <td><strong>Support</strong></td>
+                <td>✅ Direct Access to Me</td>
+                <td>❌ Customer Support Tiers</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-center mt-3" style="color: #d1d5db;">
+          I may not have a big name, but I deliver <strong style="color: #10b981;">personal attention, speed, and security</strong> that big firms can't match at the same price.
+        </p>
+      </div>
+
+      <!-- Why Choose Me -->
+      <div class="mt-5">
+        <h3 class="sub-title text-center mb-4" style="color: #34d399;">🌟 Why Choose Me?</h3>
+        <ul class="reasons-list mx-auto" style="max-width: 700px;">
+          <li>End-to-End Expertise: From UI design to backend security, everything is covered.</li>
+          <li>Transparent Workflow: You’ll always know what’s happening and when.</li>
+          <li>Clean, Secure, and Scalable Code: Built for performance and safety.</li>
+          <li>Always Learning: I stay updated with DevSecOps, AI security, and zero-trust architecture.</li>
+        </ul>
+        <p class="text-center mt-3" style="color: #d1d5db;">
+          Whether you're a small business needing a secure website, or a startup building a scalable app — I deliver the solution you deserve.
+        </p>
+      </div>
+
+      <!-- Call to Action -->
+      <div class="text-center mt-5">
+        <h3 class="sub-title mb-3" style="color: #34d399;">📩 Ready to Work Together?</h3>
+        <p style="color: #d1d5db;">Let’s create something powerful, secure, and user-friendly.</p>
+        <a href="https://wa.me/94760011886" class="btn-contact mt-3">
+          <i class="fab fa-whatsapp"></i> Contact Me
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom Animations -->
+  <script>
+    // Animate elements on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    // Reveal title and intro
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.querySelector('.section-title').style.opacity = '1';
+        document.querySelector('.section-title').style.transform = 'translateY(0)';
+      }, 200);
+
+      setTimeout(() => {
+        document.querySelector('.intro-text').style.opacity = '1';
+        document.querySelector('.intro-text').style.transform = 'translateY(0)';
+      }, 500);
+
+      // Observe service cards
+      ['card-dev', 'card-sec'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    });
+
+    // Binary Rain
+    function createBinaryRain() {
+      const container = document.getElementById('binary-rain');
+      const chars = ['0', '1'];
+      for (let i = 0; i < 50; i++) {
+        const el = document.createElement('div');
+        el.className = 'binary-char';
+        el.textContent = chars[Math.floor(Math.random() * chars.length)];
+        el.style.left = `${Math.random() * 100}vw`;
+        el.style.animationDuration = `${8 + Math.random() * 10}s`;
+        el.style.animationDelay = `${Math.random() * 5}s`;
+        container.appendChild(el);
+      }
+    }
+    createBinaryRain();
+
+    // Recreate rain every 30 seconds
+    setInterval(() => {
+      document.getElementById('binary-rain').innerHTML = '';
+      createBinaryRain();
+    }, 30000);
+
+    // Animate Previous Button
+    setTimeout(() => {
+      const btn = document.getElementById('prev-button');
+      if (btn) {
+        btn.style.opacity = '1';
+        btn.style.transform = 'translateX(0)';
+      }
+    }, 400);
+  </script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Me - Mursith Sharma</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    /* Background */
+    body {
+      background: url('https://github.com/Mursith-Sharma/Projects/blob/main/1st%20Project%20(%20Portfolio%20Website%20)/Images/Untitled%20design%20(1)%20(1).png?raw=true') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* Binary Rain Background */
+    #binary-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .binary-char {
+      position: absolute;
+      color: rgba(16, 185, 128, 0.6);
+      font-size: 18px;
+      opacity: 0.7;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100px); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    /* Section Styling */
+    .contact-section {
+      padding: 100px 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .section-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #a855f7, #06b6d4, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease-out;
+    }
+
+    .section-description {
+      color: #d1d5db;
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease-out;
+    }
+
+    /* Contact Card */
+    .contact-card {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(16, 185, 128, 0.2);
+      border-color: rgba(16, 185, 128, 0.5);
+    }
+
+    .contact-card h4 {
+      color: #34d399;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .contact-card h4 i {
+      margin-right: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .contact-card:hover h4 i {
+      transform: scale(1.2);
+    }
+
+    .contact-card a {
+      color: #e2e8f0;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .contact-card a:hover {
+      color: #06b6d4;
+    }
+
+    /* Social Icons */
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 50%;
+      color: #60a5fa;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      background: rgba(16, 185, 128, 0.2);
+      border-color: #10b981;
+      color: #10b981;
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: 0 10px 20px rgba(16, 185, 128, 0.2);
+    }
+
+    /* Bottom Text */
+    .bottom-text {
+      color: #d1d5db;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      background: rgba(30, 41, 59, 0.5);
+      padding: 1rem;
+      border-radius: 12px;
+      border-left: 4px solid #10b981;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease-out;
+    }
+
+    /* Previous Button */
+    #prev-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      background: linear-gradient(90deg, #1d4ed8, #059669);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 0 12px 12px 0;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: all 0.6s ease-out;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    #prev-button:hover {
+      transform: translateX(0);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+    }
+
+    #prev-button i {
+      transition: transform 0.3s ease;
+    }
+
+    #prev-button:hover i {
+      transform: translateX(-3px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Binary Rain Background -->
+  <div id="binary-rain"></div>
+
+  <!-- Previous Button -->
+  <a href="javascript:history.back()" id="prev-button">
+    <i class="fas fa-arrow-left"></i>
+    <span>Previous</span>
+  </a>
+
+  <section class="contact-section">
+    <div class="container">
+      <!-- Title -->
+      <h1 class="section-title text-center">Get in Touch</h1>
+
+      <!-- Description -->
+      <p class="section-description text-center">
+        Hello! I'm <strong>Mursith Sharma</strong> — a passionate developer and cybersecurity professional. I'm always happy to connect with businesses, developers, or individuals who want to build, collaborate, or secure digital solutions. Let's build together!
+      </p>
+
+      <!-- Contact Info & Social -->
+      <div class="row mt-5">
+        <!-- Contact Details -->
+        <div class="col-md-6 mb-4">
+          <div class="contact-card" id="contact-card-1">
+            <h4><i class="fas fa-envelope"></i> Email</h4>
+            <p><a href="mailto:ethicalhackmursith@gmail.com">ethicalhackmursith@gmail.com</a></p>
+
+            <h4><i class="fas fa-mobile-alt"></i> Mobile</h4>
+            <p><a href="tel:+94760011886">+94 76 001 1886</a></p>
+
+            <h4><i class="fab fa-whatsapp"></i> WhatsApp</h4>
+            <p><a href="https://wa.me/94760011886" target="_blank">Click to Message</a></p>
+
+            <h4><i class="fab fa-telegram"></i> Telegram</h4>
+            <p><a href="https://t.me/Im_Mursith" target="_blank">@Im_Mursith</a></p>
+          </div>
+        </div>
+
+        <!-- Social Profiles -->
+        <div class="col-md-6 mb-4">
+          <div class="contact-card" id="contact-card-2">
+            <h4><i class="fas fa-globe"></i> My Social Profiles</h4>
+            <div class="social-icons">
+              <a href="https://github.com/Mursith-Sharma" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/mohamed-mursith/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+              <a href="https://x.com/Mursith_Sharma" target="_blank" title="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+              <a href="https://www.instagram.com/mr.mursith_quotes?igsh=ZzlvZmx0ajhnNzF3" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.hackerrank.com/profile/Mursith_Sharma" target="_blank" title="HackerRank"><i class="fab fa-hackerrank"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Closing Text -->
+      <div class="row mt-4">
+        <div class="col">
+          <p class="bottom-text" id="text-1">
+            I respond to all professional messages within 24 hours. Don’t hesitate to reach out — whether you're interested in a collaboration, need help with a project, or have a business idea in mind.
+          </p>
+          <p class="bottom-text mt-3" id="text-2">
+            My focus is on secure full-stack development, cybersecurity assessments, and delivering high-quality digital tools. I'm open to freelance, remote, and partnership-based work.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom Animations -->
+  <script>
+    // Animate elements on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    // Reveal title and description
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.querySelector('.section-title').style.opacity = '1';
+        document.querySelector('.section-title').style.transform = 'translateY(0)';
+      }, 200);
+
+      setTimeout(() => {
+        document.querySelector('.section-description').style.opacity = '1';
+        document.querySelector('.section-description').style.transform = 'translateY(0)';
+      }, 500);
+    });
+
+    // Observe cards and text
+    ['contact-card-1', 'contact-card-2', 'text-1', 'text-2'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    // Binary Rain
+    function createBinaryRain() {
+      const container = document.getElementById('binary-rain');
+      const chars = ['0', '1'];
+      for (let i = 0; i < 50; i++) {
+        const el = document.createElement('div');
+        el.className = 'binary-char';
+        el.textContent = chars[Math.floor(Math.random() * chars.length)];
+        el.style.left = `${Math.random() * 100}vw`;
+        el.style.animationDuration = `${8 + Math.random() * 10}s`;
+        el.style.animationDelay = `${Math.random() * 5}s`;
+        container.appendChild(el);
+      }
+    }
+    createBinaryRain();
+
+    // Recreate rain every 30 seconds
+    setInterval(() => {
+      document.getElementById('binary-rain').innerHTML = '';
+      createBinaryRain();
+    }, 30000);
+
+    // Animate Previous Button
+    setTimeout(() => {
+      const btn = document.getElementById('prev-button');
+      if (btn) {
+        btn.style.opacity = '1';
+        btn.style.transform = 'translateX(0)';
+      }
+    }, 400);
+  </script>
+</body>
+</html>

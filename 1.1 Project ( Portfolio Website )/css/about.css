@@ -1,0 +1,190 @@
+
+    /* Cyberpunk Glow & Animation */
+    .highlight {
+      background: linear-gradient(90deg, #0b67c2, #00d48a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+        color: #00ffb3;
+    }
+
+    /* Background */
+    body {
+      background: url('https://github.com/Mursith-Sharma/Projects/blob/main/1st%20Project%20(%20Portfolio%20Website%20)/Images/Untitled%20design%20(1)%20(1).png?raw=true') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+        background-color: #032d1f;
+  color: #f5f5f5;
+    }
+
+    .section-title {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease-out;
+      background: linear-gradient(135deg, #a855f7, #06b6d4, #10b981);
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+        font-size: 40px;
+
+  color: #00ffb3;
+  margin-bottom: 30px;
+  text-align: center;
+
+  
+    }
+
+    .animate-fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .animate-fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .skills-box ul li {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.5s ease;
+        font-size: 16px;
+  padding-bottom: 6px;
+  color: #d2f6e9;
+    }
+
+    .skills-box ul li.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Cyber Table Styling */
+    .table th, .table td {
+      transition: all 0.3s ease;
+        vertical-align: middle;
+  font-size: 15px;
+    }
+
+    .table tbody tr:hover {
+      background: #1e293b !important;
+      transform: scale(1.01);
+      box-shadow: 0 0 15px rgba(16, 185, 128, 0.4);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    /* Binary Rain Background */
+    #binary-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .binary-char {
+      position: absolute;
+      color: rgba(16, 185, 128, 0.7);
+      font-size: 18px;
+      opacity: 0.8;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100px); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    /* Cursor for typing effect */
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 20px;
+      background: #10b981;
+      margin-left: 5px;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Previous Button - Top Left Corner */
+    #prev-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      background: linear-gradient(90deg, #1d4ed8, #059669);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 0 12px 12px 0;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: all 0.6s ease-out;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    #prev-button:hover {
+      transform: translateX(0);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+    }
+
+    #prev-button i {
+      transition: transform 0.3s ease;
+    }
+
+    #prev-button:hover i {
+      transform: translateX(-3px);
+    }
+.about-section {
+  padding: 60px 0;
+}
+
+.section-subtitle {
+  font-size: 28px;
+  color: #00ffb3;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.skills-box {
+  background-color: #044431;
+  padding: 25px;
+  border-radius: 10px;
+}
+
+.skills-box h4 {
+  color: white;
+  margin-bottom: 15px;
+}
+
+.skills-box ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.skills-box ul li::before {
+  content: "✔️ ";
+  color: #00ffb3;
+}
+
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 30px;
+  }
+}
+
