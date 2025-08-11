@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnHub - Course Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom styles that Tailwind can't easily handle */
+        .course-card {
+            transition: all 0.3s ease;
+        }
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .progress-bar {
+            height: 6px;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Mobile App Container -->
+    <div class="max-w-md mx-auto bg-white min-h-screen shadow-lg overflow-hidden relative">
+        <!-- Header -->
+        <header class="bg-indigo-600 text-white p-4 sticky top-0 z-10">
+            <div class="flex justify-between items-center">
+                <button class="text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                <h1 class="text-xl font-bold">LearnHub</h1>
+                <button class="text-white">
+                    <i class="fas fa-search text-xl"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="pb-20">
+            <!-- Hero Banner -->
+            <div class="relative h-48 bg-gradient-to-r from-purple-500 to-indigo-600 flex items-center justify-center text-white">
+                <div class="text-center px-4">
+                    <h2 class="text-2xl font-bold mb-2">Expand Your Knowledge</h2>
+                    <p class="text-sm opacity-90">Learn from the best instructors worldwide</p>
+                    <button class="mt-4 bg-white text-indigo-600 px-4 py-2 rounded-full text-sm font-semibold shadow-md">
+                        Explore Courses
+                    </button>
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="px-4 mt-6">
+                <h3 class="text-lg font-semibold mb-3">Categories</h3>
+                <div class="flex space-x-3 overflow-x-auto pb-2">
+                    <button class="flex-shrink-0 bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium">
+                        All
+                    </button>
+                    <button class="flex-shrink-0 bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-medium">
+                        Development
+                    </button>
+                    <button class="flex-shrink-0 bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-medium">
+                        Business
+                    </button>
+                    <button class="flex-shrink-0 bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-medium">
+                        Design
+                    </button>
+                    <button class="flex-shrink-0 bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-medium">
+                        Marketing
+                    </button>
+                </div>
+            </div>
+
+            <!-- Featured Courses -->
+            <div class="px-4 mt-6">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-lg font-semibold">Featured Courses</h3>
+                    <button class="text-indigo-600 text-sm font-medium">See All</button>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Course Card 1 -->
+                    <div class="course-card bg-white rounded-lg overflow-hidden shadow-md border border-gray-100">
+                        <div class="relative">
+                            <img src="https://source.unsplash.com/random/300x200/?coding" alt="Course" class="w-full h-24 object-cover">
+                            <div class="absolute top-2 right-2 bg-yellow-400 text-xs font-bold px-2 py-1 rounded-full">BEST</div>
+                        </div>
+                        <div class="p-3">
+                            <h4 class="font-semibold text-sm mb-1 line-clamp-2">Complete JavaScript Course 2024: From Zero to Expert</h4>
+                            <p class="text-xs text-gray-500 mb-2">John Doe</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-indigo-600 font-bold text-sm">$19.99</span>
+                                <div class="flex items-center text-yellow-400">
+                                    <i class="fas fa-star text-xs"></i>
+                                    <span class="text-xs ml-1 text-gray-600">4.8</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Course Card 2 -->
+                    <div class="course-card bg-white rounded-lg overflow-hidden shadow-md border border-gray-100">
+                        <div class="relative">
+                            <img src="https://source.unsplash.com/random/300x200/?design" alt="Course" class="w-full h-24 object-cover">
+                        </div>
+                        <div class="p-3">
+                            <h4 class="font-semibold text-sm mb-1 line-clamp-2">UI/UX Design Masterclass: Figma to Prototype</h4>
+                            <p class="text-xs text-gray-500 mb-2">Jane Smith</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-indigo-600 font-bold text-sm">$24.99</span>
+                                <div class="flex items-center text-yellow-400">
+                                    <i class="fas fa-star text-xs"></i>
+                                    <span class="text-xs ml-1 text-gray-600">4.9</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Popular Instructors -->
+            <div class="px-4 mt-6">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-lg font-semibold">Popular Instructors</h3>
+                    <button class="text-indigo-600 text-sm font-medium">See All</button>
+                </div>
+                
+                <div class="flex space-x-4 overflow-x-auto pb-4">
+                    <!-- Instructor 1 -->
+                    <div class="flex-shrink-0 text-center">
+                        <div class="w-16 h-16 rounded-full bg-indigo-100 flex items-center justify-center mx-auto mb-2 overflow-hidden">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Instructor" class="w-full h-full object-cover">
+                        </div>
+                        <p class="text-xs font-medium">John Doe</p>
+                        <p class="text-xs text-gray-500">JavaScript Expert</p>
+                    </div>
+                    
+                    <!-- Instructor 2 -->
+                    <div class="flex-shrink-0 text-center">
+                        <div class="w-16 h-16 rounded-full bg-indigo-100 flex items-center justify-center mx-auto mb-2 overflow-hidden">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Instructor" class="w-full h-full object-cover">
+                        </div>
+                        <p class="text-xs font-medium">Jane Smith</p>
+                        <p class="text-xs text-gray-500">UI/UX Designer</p>
+                    </div>
+                    
+                    <!-- Instructor 3 -->
+                    <div class="flex-shrink-0 text-center">
+                        <div class="w-16 h-16 rounded-full bg-indigo-100 flex items-center justify-center mx-auto mb-2 overflow-hidden">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Instructor" class="w-full h-full object-cover">
+                        </div>
+                        <p class="text-xs font-medium">Mike Johnson</p>
+                        <p class="text-xs text-gray-500">Python Developer</p>
+                    </div>
+                    
+                    <!-- Instructor 4 -->
+                    <div class="flex-shrink-0 text-center">
+                        <div class="w-16 h-16 rounded-full bg-indigo-100 flex items-center justify-center mx-auto mb-2 overflow-hidden">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Instructor" class="w-full h-full object-cover">
+                        </div>
+                        <p class="text-xs font-medium">Sarah Williams</p>
+                        <p class="text-xs text-gray-500">Marketing Pro</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Learning Section -->
+            <div class="px-4 mt-6">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-lg font-semibold">My Learning</h3>
+                    <button class="text-indigo-600 text-sm font-medium">See All</button>
+                </div>
+                
+                <!-- Tabs -->
+                <div class="flex border-b border-gray-200 mb-4">
+                    <button onclick="switchTab('ongoing')" class="tab-button flex-1 py-2 text-center font-medium text-sm border-b-2 border-indigo-600 text-indigo-600">
+                        Ongoing
+                    </button>
+                    <button onclick="switchTab('completed')" class="tab-button flex-1 py-2 text-center font-medium text-sm border-b-2 border-transparent text-gray-500">
+                        Completed
+                    </button>
+                    <button onclick="switchTab('wishlist')" class="tab-button flex-1 py-2 text-center font-medium text-sm border-b-2 border-transparent text-gray-500">
+                        Wishlist
+                    </button>
+                </div>
+                
+                <!-- Tab Content -->
+                <div id="ongoing" class="tab-content active">
+                    <!-- Course Progress 1 -->
+                    <div class="bg-white rounded-lg shadow-sm p-4 mb-3 border border-gray-100">
+                        <div class="flex">
+                            <div class="w-16 h-16 rounded-md overflow-hidden flex-shrink-0">
+                                <img src="https://source.unsplash.com/random/300x200/?react" alt="Course" class="w-full h-full object-cover">
+                            </div>
+                            <div class="ml-3 flex-1">
+                                <h4 class="font-medium text-sm mb-1">React Native Masterclass</h4>
+                                <p class="text-xs text-gray-500 mb-2">Alex Johnson</p>
+                                <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                                    <div class="progress-bar bg-indigo-600 rounded-full h-1.5" style="width: 45%"></div>
+                                </div>
+                                <p class="text-xs text-gray-500">45% completed</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Course Progress 2 -->
+                    <div class="bg-white rounded-lg shadow-sm p-4 mb-3 border border-gray-100">
+                        <div class="flex">
+                            <div class="w-16 h-16 rounded-md overflow-hidden flex-shrink-0">
+                                <img src="https://source.unsplash.com/random/300x200/?python" alt="Course" class="w-full h-full object-cover">
+                            </div>
+                            <div class="ml-3 flex-1">
+                                <h4 class="font-medium text-sm mb-1">Python for Data Science</h4>
+                                <p class="text-xs text-gray-500 mb-2">Maria Garcia</p>
+                                <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                                    <div class="progress-bar bg-indigo-600 rounded-full h-1.5" style="width: 78%"></div>
+                                </div>
+                                <p class="text-xs text-gray-500">78% completed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="completed" class="tab-content">
+                    <div class="text-center py-8">
+                        <i class="fas fa-trophy text-4xl text-yellow-400 mb-3"></i>
+                        <p class="text-gray-500">No completed courses yet</p>
+                        <button class="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                            Browse Courses
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="wishlist" class="tab-content">
+                    <div class="text-center py-8">
+                        <i class="fas fa-heart text-4xl text-pink-400 mb-3"></i>
+                        <p class="text-gray-500">Your wishlist is empty</p>
+                        <button class="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                            Find Courses
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="fixed bottom-0 w-full max-w-md bg-white border-t border-gray-200 flex justify-around py-3">
+            <a href="#" class="text-indigo-600 flex flex-col items-center">
+                <i class="fas fa-home text-xl"></i>
+                <span class="text-xs mt-1">Home</span>
+            </a>
+            <a href="#" class="text-gray-500 flex flex-col items-center">
+                <i class="fas fa-book-open text-xl"></i>
+                <span class="text-xs mt-1">My Learning</span>
+            </a>
+            <a href="#" class="text-gray-500 flex flex-col items-center">
+                <i class="fas fa-compass text-xl"></i>
+                <span class="text-xs mt-1">Explore</span>
+            </a>
+            <a href="#" class="text-gray-500 flex flex-col items-center">
+                <i class="fas fa-user text-xl"></i>
+                <span class="text-xs mt-1">Profile</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        function switchTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Update tab buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('border-indigo-600', 'text-indigo-600');
+                button.classList.add('border-transparent', 'text-gray-500');
+            });
+            
+            // Highlight active tab button
+            event.currentTarget.classList.add('border-indigo-600', 'text-indigo-600');
+            event.currentTarget.classList.remove('border-transparent', 'text-gray-500');
+        }
+        
+        // Simulate loading progress (for demo purposes)
+        setTimeout(() => {
+            document.querySelectorAll('.progress-bar').forEach(bar => {
+                const currentWidth = parseInt(bar.style.width);
+                const newWidth = Math.min(currentWidth + 10, 100);
+                bar.style.width = `${newWidth}%`;
+                
+                // Update the percentage text
+                const parent = bar.closest('.bg-white');
+                if (parent) {
+                    const percentText = parent.querySelector('p.text-xs.text-gray-500:last-child');
+                    if (percentText) {
+                        percentText.textContent = `${newWidth}% completed`;
+                    }
+                }
+            });
+        }, 2000);
+    </script>
+</body>
+</html>
